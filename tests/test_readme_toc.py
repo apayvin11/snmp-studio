@@ -28,14 +28,14 @@ class ReadmeTocTests(unittest.TestCase):
     def test_generated_block_is_idempotent_and_preserves_surrounding_text(self):
         prefix = '# Project\n\nIntro.\n'+START
         suffix = END+'\n\n## Оглавление\n\nBody.\n'
-        updated = update_document(prefix+'\nobsolete\n'+suffix)
+        updated = update_document(prefix+'\nobsolete\n'+suffix, 'Оглавление')
         self.assertTrue(updated.startswith(prefix))
         self.assertTrue(updated.endswith(suffix))
         self.assertNotIn('obsolete', updated)
         self.assertIn('[Оглавление](#оглавление-1)', updated)
-        self.assertEqual(update_document(updated), updated)
+        self.assertEqual(update_document(updated, 'Оглавление'), updated)
         crlf = updated.replace('\n', '\r\n')
-        self.assertEqual(update_document(crlf), crlf)
+        self.assertEqual(update_document(crlf, 'Оглавление'), crlf)
 
     def test_malformed_markers_are_rejected(self):
         for document in ('## No markers', END+'\n'+START, START+START+END):
@@ -44,7 +44,7 @@ class ReadmeTocTests(unittest.TestCase):
 
     def test_check_does_not_write_and_generation_refreshes_changed_headings(self):
         with tempfile.TemporaryDirectory() as temporary:
-            path = Path(temporary)/'Readme.md'
+            path = Path(temporary)/'README.md'
             original = START+'\n'+END+'\n## First\n'
             path.write_text(original, encoding='utf-8')
             with redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
@@ -56,6 +56,26 @@ class ReadmeTocTests(unittest.TestCase):
                 self.assertEqual(main([str(path), '--check']), 1)
                 self.assertEqual(main([str(path)]), 0)
             self.assertIn('  - [Second](#second)', path.read_text())
+
+    def test_both_languages_are_updated_and_checked(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            english = Path(temporary)/'README.md'
+            russian = Path(temporary)/'README.ru.md'
+            english.write_text(START+'\n'+END+'\n## Features\n', encoding='utf-8')
+            russian.write_text(START+'\n'+END+'\n## Возможности\n', encoding='utf-8')
+            paths = [str(english), str(russian)]
+            with redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                self.assertEqual(main(paths+['--check']), 1)
+                self.assertEqual(main(paths), 0)
+                self.assertEqual(main(paths+['--check']), 0)
+                russian.write_text(russian.read_text(encoding='utf-8')+'\n### Демо\n', encoding='utf-8')
+                before = russian.read_text(encoding='utf-8')
+                self.assertEqual(main(paths+['--check']), 1)
+                self.assertEqual(russian.read_text(encoding='utf-8'), before)
+            self.assertIn('## Table of contents', english.read_text(encoding='utf-8'))
+            self.assertIn('[Features](#features)', english.read_text(encoding='utf-8'))
+            self.assertIn('## Оглавление', before)
+            self.assertIn('[Возможности](#возможности)', before)
 
 
 if __name__ == '__main__':
