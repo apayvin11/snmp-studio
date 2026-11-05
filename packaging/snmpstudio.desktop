@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=SNMP Studio
+Comment=SNMP monitoring and MIB editor
+Comment[ru]=Мониторинг SNMP и редактор MIB
+Exec=snmpstudio
+Icon=snmpstudio
+Terminal=false
+Categories=Network;
+StartupWMClass=SNMPStudio

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "snmpstudio"
+version = "0.1.0"
+description = "SNMP Studio: desktop SNMP workstation and MIB editor for macOS and Linux"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+readme = "Readme.md"
+requires-python = ">=3.12"
+dependencies = ["PySide6-Essentials>=6.8,<7", "pysnmp>=7.1.31,<8", "pysmi>=2,<3", "cryptography>=48.0.1,<49; sys_platform == 'darwin' and platform_machine == 'x86_64'", "cryptography>=50.0.2,<51; sys_platform != 'darwin' or platform_machine != 'x86_64'", "keyring>=25,<26"]
+
+[project.scripts]
+snmpstudio = "snmpstudio.app:main"
+snmpstudio-agent = "snmpstudio.simulator:main"
+
+[project.optional-dependencies]
+build = ["pyinstaller>=6.22,<7"]
+
+[tool.setuptools.packages.find]
+include = ["snmpstudio*"]
+
+[tool.setuptools.package-data]
+snmpstudio = ["data/*.mib"]

@@ -1,0 +1,47 @@
+SNMPSTUDIO-DEMO-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY, OBJECT-TYPE, NOTIFICATION-TYPE, Integer32, enterprises
+        FROM SNMPv2-SMI;
+
+studio MODULE-IDENTITY
+    LAST-UPDATED "202611040000Z"
+    ORGANIZATION "SNMP Studio"
+    CONTACT-INFO "Local demonstration module"
+    DESCRIPTION "Example objects for the built-in local test agent."
+    ::= { enterprises 55555 }
+
+sensors OBJECT IDENTIFIER ::= { studio 1 }
+
+temperature OBJECT-TYPE
+    SYNTAX Integer32 (-500..1500)
+    UNITS "degrees Celsius / 10"
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION "Temperature in tenths of a degree Celsius."
+    ::= { sensors 1 }
+
+setPoint OBJECT-TYPE
+    SYNTAX Integer32 (0..1000)
+    UNITS "degrees Celsius / 10"
+    MAX-ACCESS read-write
+    STATUS current
+    DESCRIPTION "Requested temperature in tenths of a degree Celsius."
+    ::= { sensors 2 }
+
+operatingMode OBJECT-TYPE
+    SYNTAX INTEGER { standby(1), running(2), maintenance(3) }
+    MAX-ACCESS read-write
+    STATUS current
+    DESCRIPTION "Operating mode."
+    ::= { sensors 3 }
+
+notifications OBJECT IDENTIFIER ::= { studio 2 }
+
+demoStatusChanged NOTIFICATION-TYPE
+    OBJECTS { temperature, setPoint, operatingMode }
+    STATUS current
+    DESCRIPTION "Demo process status with the current temperature, set point and operating mode."
+    ::= { notifications 0 1 }
+
+END
