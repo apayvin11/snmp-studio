@@ -13,6 +13,7 @@ The application is called **SNMP Studio**, the repository and project directory 
 ## Table of contents
 
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [MIB browser and editor](#mib-browser-and-editor)
 - [Running from source](#running-from-source)
 - [Demo](#demo)
@@ -46,6 +47,26 @@ The application is called **SNMP Studio**, the repository and project directory 
 - SNMPv3 encrypted bytes as transmitted, alongside the decrypted PDU.
 - SQLite storage and JSON import/export without secrets.
 - Russian and English interfaces, with two themes switched using an icon.
+
+## Screenshots
+
+The application in the dark theme with an English interface and the built-in demo agent.
+
+**Monitoring** — live values, units, and polling status.
+
+![SNMP Studio monitoring page with an English interface](docs/screenshots/en/monitor.png)
+
+**MIB browser** — object properties and a successful GET request.
+
+![SNMP Studio MIB browser with an English interface](docs/screenshots/en/mib-browser.png)
+
+**MIB constructor** — visual editing of object properties.
+
+![SNMP Studio MIB constructor with an English interface](docs/screenshots/en/mib-constructor.png)
+
+**Traffic journal** — actual SNMP packets and their wire bytes.
+
+![SNMP Studio traffic journal with an English interface](docs/screenshots/en/traffic-journal.png)
 
 ## MIB browser and editor
 
