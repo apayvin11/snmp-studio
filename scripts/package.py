@@ -18,7 +18,7 @@ from generate_icons import generate
 from collect_licenses import collect
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.1.0"
+VERSION = "1.0.0"
 BUNDLE_ID = "io.snmpstudio.desktop"
 DISPLAY_NAME = "SNMP Studio"
 
@@ -66,7 +66,7 @@ def bundle(arch, icons):
         info = app/"Contents"/"Info.plist"
         with info.open("rb") as stream:
             data = plistlib.load(stream)
-        data.update(CFBundleShortVersionString=VERSION, CFBundleVersion="0.1.0",
+        data.update(CFBundleShortVersionString=VERSION, CFBundleVersion=VERSION,
                     NSHighResolutionCapable=True, LSMinimumSystemVersion="15.0",
                     CFBundleName=DISPLAY_NAME, CFBundleDisplayName=DISPLAY_NAME, NSHumanReadableCopyright=f"{DISPLAY_NAME} contributors")
         with info.open("wb") as stream:

@@ -4,9 +4,11 @@
 
 Кроссплатформенная рабочая станция для SNMP: мониторинг устройств, браузер MIB, включаемый редактор исходного текста, команды SET и журнал реального сетевого обмена.
 
-Разрабатываемая версия: **0.1.0**. Лицензия: **Apache 2.0**.
+Версия: **1.0.0**. Лицензия: **Apache 2.0**.
 
 Отображаемое имя приложения — **SNMP Studio**, имя репозитория и каталога проекта — `snmp-studio`, команда запуска — `snmpstudio`.
+
+Установщики для macOS (Apple Silicon / Intel) и Ubuntu 24.04 (ARM64 / AMD64) доступны в [GitHub Releases](https://github.com/apayvin11/snmp-studio/releases/latest).
 
 <!-- toc:start -->
 
@@ -307,7 +309,7 @@ python scripts/package.py --format deb --arch arm64
 python scripts/package.py --format deb --arch x86_64
 ```
 
-Результаты находятся в `release/`, рядом записываются SHA256. Для установки `.dmg` перенесите приложение в Applications; для `.deb` выполните `sudo apt install ./release/snmpstudio_0.1.0_<архитектура>.deb`.
+Результаты находятся в `release/`, рядом записываются SHA256. Для установки `.dmg` перенесите приложение в Applications; для `.deb` выполните `sudo apt install ./release/snmpstudio_1.0.0_<архитектура>.deb`.
 
 По умолчанию macOS-сборка подписывается ad-hoc, без нотариального заверения. Для Developer ID задайте `MACOS_CODESIGN_IDENTITY`; для нотариального заверения — `MACOS_NOTARY_PROFILE`. Без этих настроек установщик не является нотариально заверенным выпуском.
 

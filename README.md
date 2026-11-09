@@ -4,9 +4,11 @@
 
 A cross-platform SNMP workstation for device monitoring, MIB browsing, an optional source editor, SET commands, and a journal of actual network traffic.
 
-Development version: **0.1.0**. License: **Apache 2.0**.
+Version: **1.0.0**. License: **Apache 2.0**.
 
 The application is called **SNMP Studio**, the repository and project directory are named `snmp-studio`, and the launch command is `snmpstudio`.
+
+Download the macOS (Apple Silicon / Intel) and Ubuntu 24.04 (ARM64 / AMD64) installers from [GitHub Releases](https://github.com/apayvin11/snmp-studio/releases/latest).
 
 <!-- toc:start -->
 
@@ -306,7 +308,7 @@ python scripts/package.py --format deb --arch arm64
 python scripts/package.py --format deb --arch x86_64
 ```
 
-Outputs are written to `release/`, alongside SHA256 checksums. To install a `.dmg`, drag the application into Applications. For a `.deb`, run `sudo apt install ./release/snmpstudio_0.1.0_<architecture>.deb`, replacing `<architecture>` with the package architecture.
+Outputs are written to `release/`, alongside SHA256 checksums. To install a `.dmg`, drag the application into Applications. For a `.deb`, run `sudo apt install ./release/snmpstudio_1.0.0_<architecture>.deb`, replacing `<architecture>` with the package architecture.
 
 By default, macOS builds are ad-hoc signed and not notarized. Set `MACOS_CODESIGN_IDENTITY` for Developer ID signing and `MACOS_NOTARY_PROFILE` for notarization. Without these settings, the installer is not a notarized release.
 

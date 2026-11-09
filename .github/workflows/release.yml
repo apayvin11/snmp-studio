@@ -21,22 +21,22 @@ jobs:
             runner: macos-15
             arch: arm64
             format: dmg
-            artifact: SNMPStudio-0.1.0-macos-arm64
+            artifact: SNMPStudio-1.0.0-macos-arm64
           - name: macOS Intel
             runner: macos-15-intel
             arch: x86_64
             format: dmg
-            artifact: SNMPStudio-0.1.0-macos-x86_64
+            artifact: SNMPStudio-1.0.0-macos-x86_64
           - name: Ubuntu AMD64
             runner: ubuntu-24.04
             arch: x86_64
             format: deb
-            artifact: snmpstudio_0.1.0_amd64
+            artifact: snmpstudio_1.0.0_amd64
           - name: Ubuntu ARM64
             runner: ubuntu-24.04-arm
             arch: arm64
             format: deb
-            artifact: snmpstudio_0.1.0_arm64
+            artifact: snmpstudio_1.0.0_arm64
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
